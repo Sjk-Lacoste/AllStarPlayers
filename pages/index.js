@@ -31,12 +31,27 @@ function Home({ nba }) {
             <Grid container spacing={2}>
               {/* {console.log(key)} */}
               { key.forEach((player) => {
-                // <p>{console.log(player.firstName)}</p>
-                <Grid item md={4}>{player.firstName}</Grid>
+                <p>{console.log(player.firstName + " " + player.lastName)}</p>
+                // <Grid item md={4}>
+                //   <Card>
+                //     <CardContent>
+                //       <h1>{player.firstName}</h1>
+                //     </CardContent>
+                //   </Card>
+                // </Grid>
               }) }
             </Grid>
           }) }
 
+          <Grid container spacing={2}>
+            <Grid item md={4}>
+              <Card>
+                <CardContent>
+                  <h1>Tshepo</h1>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
         </main>
 
         <footer>

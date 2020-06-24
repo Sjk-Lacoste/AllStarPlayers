@@ -32,9 +32,9 @@ function Home({ nba }) {
                       <Grid item xs={12} sm={12} md={4} lg={4}>
                         <Card>
                           <CardContent>
-                            <h2>{player.firstName}</h2>
-                            <h2>{player.lastName}</h2>
-                            <h2>{player.team}</h2>
+                            <h2>{player.firstName} {player.lastName}</h2>
+                            
+                            <h3>{player.teamName}</h3>
                           </CardContent>
                         </Card>
                     </Grid>

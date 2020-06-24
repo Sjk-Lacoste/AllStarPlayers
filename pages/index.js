@@ -8,8 +8,6 @@ import fetch from 'node-fetch';
 import { keys } from '@material-ui/core/styles/createBreakpoints';
 
 function Home({ nba }) {
-  // console.log(nba.roster[0].players);
-  
   return (
     <div>
       <CssBaseline />
@@ -26,31 +24,25 @@ function Home({ nba }) {
         
         <main>
           <h1>NBA TEAMS</h1>
-          
-          { Object.values(nba.roster[0].players).map((key) => {
-            <Grid container spacing={2}>
-              {/* {console.log(key)} */}
-              { key.forEach((player) => {
-                <p>{console.log(player.firstName + " " + player.lastName)}</p>
-                // <Grid item md={4}>
-                //   <Card>
-                //     <CardContent>
-                //       <h1>{player.firstName}</h1>
-                //     </CardContent>
-                //   </Card>
-                // </Grid>
-              }) }
-            </Grid>
-          }) }
-
           <Grid container spacing={2}>
-            <Grid item md={4}>
-              <Card>
-                <CardContent>
-                  <h1>Tshepo</h1>
-                </CardContent>
-              </Card>
-            </Grid>
+          { Object.values(nba.roster).map(roster => (
+              Object.values(roster.players).map(players => (
+                players.map((player, index) => (
+                  
+                      <Grid item xs={12} sm={12} md={4} lg={4}>
+                        <Card>
+                          <CardContent>
+                            <h2>{player.firstName}</h2>
+                            <h2>{player.lastName}</h2>
+                            <h2>{player.team}</h2>
+                          </CardContent>
+                        </Card>
+                    </Grid>
+                  
+                ))
+              ))
+            ))
+          }
           </Grid>
         </main>
 

@@ -6,6 +6,10 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import fetch from 'node-fetch';
 import { keys } from '@material-ui/core/styles/createBreakpoints';
+import { Button } from '@material-ui/core';
+import Players from '../components/players';
+import PlayerDetails from '../components/playerDetails';
+import pdfHelper from '../lib/pdfHelper';
 
 function Home({ nba }) {
   return (
@@ -23,21 +27,38 @@ function Home({ nba }) {
         </Head>
         
         <main>
-          <h1>NBA TEAMS</h1>
+          <div className="header">
+            <h1>ALL STAR NBA PLAYERS</h1>
+            <div className="header-btn">
+              <Button variant="outlined" color="primary">Export PDF</Button>
+            </div>
+          </div>
+
+          {/* <Players>
+            { Object.values(nba.roster).map(roster => (
+                Object.values(roster.players).map(players => (
+                  players.map((player, index) => (
+                    <PlayerDetails key={index} name={player.firstName} surname={player.lastName} team={player.teamName} />        
+                  ))
+                ))
+              ))
+            }
+          </Players> */}
+
           <Grid container spacing={2}>
           { Object.values(nba.roster).map(roster => (
               Object.values(roster.players).map(players => (
                 players.map((player, index) => (
                   
-                      <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Card>
-                          <CardContent>
-                            <h2>{player.firstName} {player.lastName}</h2>
+                  <Grid key={index} item xs={12} sm={12} md={4} lg={4}>
+                    <Card>
+                      <CardContent>
+                        <h2>{player.firstName} {player.lastName}</h2>
                             
-                            <h3>{player.teamName}</h3>
-                          </CardContent>
-                        </Card>
-                    </Grid>
+                        <h3>{player.teamName}</h3>
+                      </CardContent>
+                    </Card>
+                  </Grid>
                   
                 ))
               ))
@@ -59,6 +80,18 @@ function Home({ nba }) {
           .container {
             min-height: 100vh;
           }
+
+          .header {
+            display flex;
+            justify-content: space-between;
+            align-atems: center;
+          }
+
+          .header .header-btn {
+            display: flex;
+            align-items: center;
+          }
+          
 
           footer {
             width: 100%;
@@ -107,7 +140,7 @@ function Home({ nba }) {
   )
 }
 
-Home.getInitialProps = async function(ctx){
+Home.getInitialProps = async function(){
   const res = await fetch('https://data.nba.net/prod/v1/allstar/2016/AS_roster.json');
   const data = await res.json();
 
